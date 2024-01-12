@@ -1,8 +1,39 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./style/Login.css";
 
-const Login = (props) => {
+const Login = () => {
+  const [idUser, setIdUser] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/login", {
+        idUser,
+        password,
+      });
+
+      console.log(response.data);
+      toast.success("Login successful!");
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          toast.error("User not found");
+        } else if (error.response.status === 401) {
+          toast.error("Incorrect password");
+        } else {
+          console.error("Login error:", error.response.data);
+          toast.error(
+            "An error occurred during login. Please try again later."
+          );
+        }
+      }
+    }
+  };
+
   return (
     <>
       <div className="parent">
@@ -39,12 +70,21 @@ const Login = (props) => {
             type="text"
             className="email"
             placeholder="Enter email or username"
+            onChange={(e) => setIdUser(e.target.value)}
           />
-          <input type="password" className="pass" placeholder="Password" />
+          <input
+            type="password"
+            className="pass"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <button className="login">Login</button>
+          <button className="login" onClick={handleLogin}>
+            Login
+          </button>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
