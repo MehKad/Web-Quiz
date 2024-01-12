@@ -30,6 +30,15 @@ const Register = () => {
 
       console.log(response.data);
       toast.success("Registration successful!");
+
+      const toastPromise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+
+      await toastPromise;
+
       navigate("/");
     } catch (error) {
       if (error.response) {
