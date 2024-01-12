@@ -19,7 +19,7 @@ const Register = (props) => {
               <div className="Paragraphs">
                 <p className="div-1">If you already have an account</p>
                 <p className="div-2">
-                  You can <Link to="/login">Login here!</Link>
+                  You can <Link to="/">Login here!</Link>
                 </p>
               </div>
             </span>
