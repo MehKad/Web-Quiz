@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import "./style/Register.css";
 
 const Register = (props) => {
@@ -17,7 +18,9 @@ const Register = (props) => {
               <h2 className="text">Our Webpage Quiz project </h2>
               <div className="Paragraphs">
                 <p className="div-1">If you already have an account</p>
-                <p className="div-2">You can Login here !</p>
+                <p className="div-2">
+                  You can <Link to="/login">Login here!</Link>
+                </p>
               </div>
             </span>
           </div>

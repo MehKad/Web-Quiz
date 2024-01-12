@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import "./style/Login.css";
 
 const Login = (props) => {
@@ -17,7 +18,9 @@ const Login = (props) => {
               <h2 className="text">Our Webpage Quiz project </h2>
               <div className="Paragraphs">
                 <p className="div-1">If you don’t have an account</p>
-                <p className="div-2">You can Register here !</p>
+                <p className="div-2">
+                  You can <Link to="/register">Register here!</Link>
+                </p>
               </div>
             </span>
           </div>
