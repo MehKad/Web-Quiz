@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style/Register.css";
 
 const Register = () => {
+  const navigate = useNavigate(); // Use useNavigate hook for navigation
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState();
@@ -29,6 +30,7 @@ const Register = () => {
 
       console.log(response.data);
       toast.success("Registration successful!");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400 && error.response.data.error) {
