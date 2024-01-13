@@ -1,12 +1,24 @@
 .quiz-details {
-  max-width: 600px;
+  width: 60vw;
   margin: auto;
+}
+
+.header {
+  display: flex;
+  gap: 20vw;
 }
 
 .quiz-title {
   text-align: center;
   color: #333;
   margin-bottom: 40px;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
 .question-container {

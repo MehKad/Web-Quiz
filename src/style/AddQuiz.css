@@ -73,3 +73,15 @@
   gap: 80px;
   margin: 10vh;
 }
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  gap: 20vw;
+}

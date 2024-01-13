@@ -5,6 +5,7 @@ import "./style/AddQuiz.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
 
 const AddQuiz = () => {
   const navigate = useNavigate();
@@ -53,7 +54,12 @@ const AddQuiz = () => {
   return (
     <>
       <div className="add-quiz-details">
-        <h1 className="quiz-title">Quiz Details</h1>
+        <div className="header">
+          <button onClick={() => navigate("/home")} className="back-button">
+            <FiChevronLeft />
+          </button>
+          <h1 className="quiz-title">Quiz Details</h1>
+        </div>
         <form onSubmit={handleSubmit} className="form-container">
           <label className="label-title">Quiz Title:</label>
           <input
