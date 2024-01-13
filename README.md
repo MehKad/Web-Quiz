@@ -36,7 +36,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repo :
 
    ```
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/mehkad/Web-Quiz.git
    ```
 
 2. Install NPM packages :
@@ -47,22 +47,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Usage
 
-To start the server on your local machine for development purposes, run the following:
+To start the server on your local machine for development purposes, and using the concurrently module, run the following:
 
 ```
-cd server
-```
-
-```
-nodemon ./App.js
-```
-
-```
-cd ..
-```
-
-```
-npm start
+npm run begin
 ```
 
 The application will start running on http://localhost:3000.

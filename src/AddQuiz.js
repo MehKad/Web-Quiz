@@ -10,7 +10,7 @@ import { FiChevronLeft } from "react-icons/fi";
 const AddQuiz = () => {
   const navigate = useNavigate();
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [quiz, setQuiz] = useState({
     title: "",
     username: user.data.user.username,
