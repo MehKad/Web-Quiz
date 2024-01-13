@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Quiz = require("../models/Quiz");
 
 const apiControllers = {
   register: async (req, res) => {
@@ -50,6 +51,46 @@ const apiControllers = {
       }
     } catch (error) {
       console.error("Error during login:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+  getQuizes: async (req, res) => {
+    try {
+      const quizzes = await Quiz.find();
+
+      res.json(quizzes);
+    } catch (error) {
+      console.error("Error getting quizes:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
+  getQuizebyId: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const quiz = await Quiz.findById(id);
+      res.json(quiz);
+    } catch (error) {
+      console.error("Error getting quiz:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
+  addQuiz: async (req, res) => {
+    try {
+      const { title, username, questions } = req.body;
+
+      const newQuiz = new Quiz({
+        title,
+        username,
+        questions,
+      });
+
+      const savedQuiz = await newQuiz.save();
+
+      res.json(savedQuiz);
+    } catch (error) {
+      console.error("Error adding quiz:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   },

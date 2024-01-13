@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style/Login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [idUser, setIdUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +18,9 @@ const Login = () => {
       });
 
       console.log(response.data);
-      toast.success("Login successful!");
+      toast.success("Login successful!", {
+        onClose: () => handleNavigation(response.data.user),
+      });
     } catch (error) {
       if (error.response) {
         if (error.response.status === 404) {
@@ -32,6 +35,10 @@ const Login = () => {
         }
       }
     }
+  };
+
+  const handleNavigation = (data) => {
+    navigate("/home", { state: { yourDataKey: data } });
   };
 
   return (
