@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "./userContext";
 import { Link } from "react-router-dom";
+import "./style/Home.css";
 
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
@@ -26,21 +27,27 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>Quiz Titles</h1>
-      <ul>
+    <div className="home-container">
+      <h1 className="home-title">Quiz Titles</h1>
+      <ul className="home-list">
         {quizes.map((quiz, index) => (
-          <li key={index}>
+          <li className="home-list-items" key={index}>
             <Link to={`/quiz/${quiz._id}`}>{quiz.title}</Link>
           </li>
         ))}
       </ul>
-      {user && user.data.user.isTeacher && (
-        <Link to={"/addQuiz"}>
-          <button>Create Quiz</button>
-        </Link>
-      )}
-      {user && <button onClick={handleLogout}>Logout</button>}
+      <div className="wrapp-buttons">
+        {user && user.data.user.isTeacher && (
+          <Link to={"/addQuiz"}>
+            <button className="Home-button">Create Quiz</button>
+          </Link>
+        )}
+        {user && (
+          <button className="Home-button" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
+      </div>
     </div>
   );
 };

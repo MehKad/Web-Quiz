@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./userContext";
 import axios from "axios";
+import "./style/AddQuiz.css";
 
 const AddQuiz = () => {
   const { user, setUser } = useContext(UserContext);
@@ -43,68 +44,73 @@ const AddQuiz = () => {
   };
 
   return (
-    <div>
-      <h1>Quiz Details</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Quiz Title:
-          <input
-            type="text"
-            value={quiz.title}
-            onChange={(e) => setQuiz({ ...quiz, title: e.target.value })}
-          />
-        </label>
+    <div className="add-quiz-details">
+      <h1 className="quiz-title">Quiz Details</h1>
+      <form onSubmit={handleSubmit} className="form-container">
+        <label className="label-title">Quiz Title:</label>
+        <input
+          type="text"
+          value={quiz.title}
+          onChange={(e) => setQuiz({ ...quiz, title: e.target.value })}
+          className="input-field"
+        />
         {quiz.questions.map((question, qIndex) => (
-          <div key={qIndex}>
-            <label>
-              Question:
-              <input
-                type="text"
-                value={question.text}
-                onChange={(e) => {
-                  const newQuestions = [...quiz.questions];
-                  newQuestions[qIndex].text = e.target.value;
-                  setQuiz({ ...quiz, questions: newQuestions });
-                }}
-              />
-            </label>
+          <div key={qIndex} className="question-container">
+            <label className="question-label">Question:</label>
+            <input
+              type="text"
+              value={question.text}
+              onChange={(e) => {
+                const newQuestions = [...quiz.questions];
+                newQuestions[qIndex].text = e.target.value;
+                setQuiz({ ...quiz, questions: newQuestions });
+              }}
+              className="input-field"
+            />
             {question.options.map((option, oIndex) => (
-              <div key={oIndex}>
-                <label>
-                  Option:
-                  <input
-                    type="text"
-                    value={option}
-                    onChange={(e) => {
-                      const newQuestions = [...quiz.questions];
-                      newQuestions[qIndex].options[oIndex] = e.target.value;
-                      setQuiz({ ...quiz, questions: newQuestions });
-                    }}
-                  />
-                </label>
+              <div key={oIndex} className="option-container">
+                <label className="option-label">Option:</label>
+                <input
+                  type="text"
+                  value={option}
+                  onChange={(e) => {
+                    const newQuestions = [...quiz.questions];
+                    newQuestions[qIndex].options[oIndex] = e.target.value;
+                    setQuiz({ ...quiz, questions: newQuestions });
+                  }}
+                  className="input-field"
+                />
               </div>
             ))}
-            <label>
-              Correct Option:
-              <input
-                type="text"
-                value={question.correctOption}
-                onChange={(e) => {
-                  const newQuestions = [...quiz.questions];
-                  newQuestions[qIndex].correctOption = e.target.value;
-                  setQuiz({ ...quiz, questions: newQuestions });
-                }}
-              />
-            </label>
-            <button type="button" onClick={() => addOption(qIndex)}>
+            <label className="question-label">Correct Option:</label>
+            <input
+              type="text"
+              value={question.correctOption}
+              onChange={(e) => {
+                const newQuestions = [...quiz.questions];
+                newQuestions[qIndex].correctOption = e.target.value;
+                setQuiz({ ...quiz, questions: newQuestions });
+              }}
+              className="input-field"
+            />
+            <button
+              type="button"
+              onClick={() => addOption(qIndex)}
+              className="add-button"
+            >
               Add Option
             </button>
           </div>
         ))}
-        <button type="button" onClick={addQuestion}>
-          Add Question
-        </button>
-        <button type="submit">Submit</button>
+
+        <div className="buttons-wrapper">
+          <button type="button" onClick={addQuestion} className="add-button">
+            Add Question
+          </button>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

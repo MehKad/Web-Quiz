@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./style/QuizData.css";
 
 const QuizData = () => {
   const [quizDetails, setQuizDetails] = useState({});
@@ -32,16 +33,16 @@ const QuizData = () => {
   };
 
   return (
-    <div>
-      <h1>Quiz Details</h1>
-      {quizDetails.questions?.map((i) => (
-        <div key={i._id}>
-          <p>{i.text}</p>
-          <ul>
+    <div className="quiz-details">
+      <h1 className="quiz-title">Quiz Details</h1>
+      {quizDetails.questions?.map((i, questionIndex) => (
+        <div key={i._id} className="question-container">
+          <p className="question-text">{i.text}</p>
+          <ul className="options-list">
             {i.options?.map((option, index) => (
               <li
                 key={index}
-                style={{ cursor: "pointer" }}
+                className="option"
                 onClick={() => handleOptionClick(option, i.correctOption)}
               >
                 {option}
