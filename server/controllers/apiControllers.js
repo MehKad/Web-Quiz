@@ -94,6 +94,18 @@ const apiControllers = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+
+  deleteQuiz: async (req, res) => {
+    try {
+      const { id } = req.params;
+      await Quiz.findByIdAndDelete(id).then(() => {
+        res.json("Quiz deleted");
+      });
+    } catch (error) {
+      console.error("Error deleting Quiz", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
 
 module.exports = apiControllers;
