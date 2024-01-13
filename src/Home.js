@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { UserContext } from "./userContext";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   const [quizes, setQuizes] = useState([]);
-  const location = useLocation();
-  const yourData = location.state?.yourDataKey;
 
   useEffect(() => {
     const fetchQuizes = async () => {
@@ -21,8 +20,9 @@ const Home = () => {
     fetchQuizes();
   }, []);
 
-  const handleNavigation = () => {
-    navigate("/addQuiz", { state: { yourDataKey: yourData } });
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
   return (
@@ -35,9 +35,12 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      {yourData && yourData.isTeacher && (
-        <button onClick={handleNavigation}>Create Quiz</button>
+      {user && user.data.user.isTeacher && (
+        <Link to={"/addQuiz"}>
+          <button>Create Quiz</button>
+        </Link>
       )}
+      {user && <button onClick={handleLogout}>Logout</button>}
     </div>
   );
 };

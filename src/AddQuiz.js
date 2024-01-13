@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { UserContext } from "./userContext";
 import axios from "axios";
 
 const AddQuiz = () => {
-  const location = useLocation();
-  const yourData = location.state?.yourDataKey;
-
+  const { user, setUser } = useContext(UserContext);
   const [quiz, setQuiz] = useState({
     title: "",
-    username: yourData.username,
+    username: user.data.user.username,
     questions: [
       {
         text: "",

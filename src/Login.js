@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { UserContext } from "./userContext";
 import "react-toastify/dist/ReactToastify.css";
 import "./style/Login.css";
 
 const Login = () => {
+  const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   const [idUser, setIdUser] = useState("");
   const [password, setPassword] = useState("");
@@ -17,10 +20,12 @@ const Login = () => {
         password,
       });
 
+      setUser(response);
+      localStorage.setItem("user", JSON.stringify(response));
+
       console.log(response.data);
-      toast.success("Login successful!", {
-        onClose: () => handleNavigation(response.data.user),
-      });
+      toast.success("Login successful!");
+      navigate("/home");
     } catch (error) {
       if (error.response) {
         if (error.response.status === 404) {
@@ -37,9 +42,9 @@ const Login = () => {
     }
   };
 
-  const handleNavigation = (data) => {
-    navigate("/home", { state: { yourDataKey: data } });
-  };
+  // const handleNavigation = (data) => {
+  // navigate("/home", { state: { yourDataKey: data } });
+  // };
 
   return (
     <>
