@@ -47,3 +47,9 @@
   border: none;
   cursor: pointer;
 }
+.edit {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: end;
+}
