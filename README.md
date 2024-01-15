@@ -45,6 +45,15 @@ These instructions will get you a copy of the project up and running on your loc
    npm install
    ```
 
+3. Go to ./server/App.js and change the following line to your own database connection :
+
+   ```
+   mongoose
+   .connect(
+      "mongodb+srv://mehkadiri:azerty@quiz.j0qb7ph.mongodb.net/?retryWrites=true&w=majority"
+   )
+   ```
+
 ### Usage
 
 To start the server on your local machine for development purposes, and using the concurrently module, run the following:
